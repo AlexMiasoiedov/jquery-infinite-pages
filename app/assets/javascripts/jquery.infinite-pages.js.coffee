@@ -45,10 +45,11 @@ Released under the MIT License
       scrollHandler = (=> @check())
 
       @$context.scroll ->
-        if scrollTimeout
-          clearTimeout(scrollTimeout)
-          scrollTimeout = null
-        scrollTimeout = setTimeout(scrollHandler, 250)
+        if (window.innerHeight + window.scrollY) >= document.body.offsetHeight
+          if scrollTimeout
+            clearTimeout(scrollTimeout)
+            scrollTimeout = null
+          scrollTimeout = setTimeout(scrollHandler, 250)
 
     # Internal helper for logging messages
     _log: (msg) ->
